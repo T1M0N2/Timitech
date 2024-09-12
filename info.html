@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibelverse</title>
+    <link rel="icon" href="icon.png" type="image/png">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        /* Allgemeine Formatierung */
+        body {
+            font-family: "Times New Roman", Times, serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            overflow-x: hidden; /* Verhindert horizontales Scrollen */
+        }
+
+        /* Header */
+        header {
+            background-color: #888;
+            color: white;
+        }
+
+        /* Hamburger-Icon */
+        .hamburger {
+            font-size: 30px;
+            cursor: pointer;
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        /* Seitenleiste (Sidenav) */
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: white;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        /* Links in der Sidenav */
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #000;
+            display: block;
+            transition: 0.3s;
+        }
+
+        /* Hover-Effekt für die Links */
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        /* Schließen-Schaltfläche */
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        /* Header-Navigation */
+        .w3-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        /* Hauptcontainer für Seiteninhalt */
+        #info-container {
+            margin: 100px auto;
+            padding: 20px;
+            max-width: 800px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Titel und Text */
+        h2, p {
+            color: #333;
+            text-align: left;
+        }
+
+        /* Footer */
+        footer {
+            padding: 5px 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid #ccc;
+            background-color: #888;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header mit Hamburger-Menü -->
+    <header class="w3-top">
+        <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing: 4px;">
+            <span class="hamburger" onclick="openNav()">&#9776;</span> <!-- Hamburger-Icon -->
+            <a href="index.html" class="w3-bar-item w3-button">Jesus2you</a>
+        </div>
+    </header>
+
+    <!-- Seitenleiste (Sidenav) -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">Bibelverse</a>
+        <a href="info.html">Kontakt</a>
+    </div>
+
+    <!-- Hauptcontainer für die Inhalte der Website -->
+    <div id="info-container">
+        <h2>E-Mail</h2>
+        <p>Jesus2you@gmx.ch</p>
+    </div>
+    <div id="info-container">
+        <h2>Telefon</h2>
+        <p>+417600000000</p>
+    </div>
+    <div id="info-container">
+        <h2>Fragen</h2>
+        <p>Frage?</p>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w3-center w3-white w3-padding-20">
+        <p></p>
+    </footer>
+
+    <!-- JavaScript zum Öffnen und Schließen der Seitenleiste -->
+    <script>
+        /* Öffnet die Seitenleiste */
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        /* Schließt die Seitenleiste */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+</body>
+</html>

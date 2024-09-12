@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zufällige Bibelverse und Bücher</title>
+    <link rel="icon" href="icon.png" type="image/png">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        /* Allgemeine Formatierung */
+        body {
+            font-family: "Times New Roman", Times, serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            overflow-y: scroll;
+        }
+
+        /* Hauptcontainer */
+        #main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 100px;
+        }
+
+        /* Kartencontainer */
+        .card-container {
+            perspective: 1000px;
+            width: 300px;
+            margin: 20px;
+        }
+
+        /* Karte */
+        .card {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+
+        .card.flip {
+            transform: rotateY(180deg);
+        }
+
+        /* Vorder- und Rückseite der Karte */
+        .card-side {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: #fff;
+            border-radius: 10px;
+        }
+
+        /* Vorderseite der Karte */
+        .card-front {
+            background-color: #888;
+        }
+
+        /* Rückseite der Karte */
+        .card-back {
+            background-color: #4CAF50;
+            transform: rotateY(180deg);
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Kreuzsymbol auf der Karte */
+        .card-logo {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        /* Header und Footer */
+        header, footer {
+            background-color: #888;
+            color: #fff;
+        }
+
+        body, header, footer {
+            font-family: Arial, sans-serif;
+        }
+
+        footer {
+            padding: 5px 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid #ccc;
+            background-color: #888;
+        }
+
+        /* Hamburger-Icon */
+        .hamburger {
+            font-size: 30px;
+            cursor: pointer;
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        /* Seitenleiste (Sidenav) */
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: white;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        /* Links in der Sidenav */
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #000;
+            display: block;
+            transition: 0.3s;
+        }
+
+        /* Hover-Effekt für die Links */
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        /* Schließen-Schaltfläche */
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        /* Header-Navigation */
+        .w3-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header mit Hamburger-Menü -->
+    <header class="w3-top">
+        <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing: 4px;">
+            <span class="hamburger" onclick="openNav()">&#9776;</span> <!-- Hamburger-Icon -->
+            <a href="index.html" class="w3-bar-item w3-button">Jesus2you</a>
+        </div>
+    </header>
+
+    <!-- Seitenleiste (Sidenav) -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">Bibelverse</a>
+        <a href="info.html">Kontakt</a>
+    </div>
+
+    <!-- Hauptcontainer für die Karten -->
+    <div id="main-container">
+        <!-- Karte für Bibelvers -->
+        <div class="card-container" onclick="flipCard(this, 'verse')">
+            <div class="card">
+                <div class="card-side card-front">
+                    <div class="card-logo">✝</div>
+					<div class="card-text">Ziehe einen Bibelvers</div>
+                </div>
+                <div class="card-side card-back" id="verse-card-back">
+                    <!-- Rückseite wird durch das JavaScript mit Vers gefüllt -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Karte für Bibelbuch -->
+        <div class="card-container" onclick="flipCard(this, 'book')">
+            <div class="card">
+                <div class="card-side card-front">
+                    <div class="card-logo">📖</div>
+                    <div>Ziehe ein Buch</div>
+                </div>
+                <div class="card-side card-back" id="book-card-back">
+                    <!-- Rückseite wird durch das JavaScript mit Buch gefüllt -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w3-center w3-white w3-padding-20">
+        <p></a>.</p>
+    </footer>
+
+    <!-- JavaScript zum Öffnen und Schließen der Seitenleiste -->
+    <script>
+        /* Öffnet die Seitenleiste */
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        /* Schließt die Seitenleiste */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+
+        // Array mit Bibelversen
+        const bibleVerses = [
+            "Denn bei Gott ist kein Ding unmöglich. - Lukas 1:37",
+            "Seid stark und mutig, fürchtet euch nicht und erschreckt nicht vor ihnen! - Josua 1:9",
+            "Der HERR ist mein Licht und mein Heil; vor wem sollte ich mich fürchten? - Psalm 27:1",
+            "Alle eure Sorge werft auf ihn; denn er sorgt für euch. - 1. Petrus 5:7",
+            "Denn ich weiß wohl, was ich für Gedanken über euch habe, spricht der HERR: Gedanken des Friedens. - Jeremia 29:11"
+        ];
+
+        // Array mit Bibelbüchern
+        const bibleBooks = [
+            "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges", "Ruth",
+            "1 Samuel", "2 Samuel", "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles", "Ezra", "Nehemiah",
+            "Esther", "Job", "Psalms", "Proverbs", "Ecclesiastes", "Song of Solomon", "Isaiah", "Jeremiah",
+            "Matthew", "Mark", "Luke", "John", "Acts", "Romans", "1 Corinthians", "2 Corinthians", "Galatians",
+            "Ephesians", "Philippians", "Hebrews", "James", "1 Peter", "2 Peter", "Revelation"
+        ];
+
+        // Funktion zum Drehen der Karte und Einfügen des Verses/Buchs
+        function flipCard(cardContainer, type) {
+            const card = cardContainer.querySelector('.card');
+            const back = card.querySelector('.card-back');
+
+            // Drehe die Karte
+            card.classList.toggle('flip');
+
+            if (!card.classList.contains('flip')) return; // Nur beim Umdrehen den Inhalt anzeigen
+
+            setTimeout(() => {
+                if (type === 'verse') {
+                    const randomVerse = bibleVerses[Math.floor(Math.random() * bibleVerses.length)];
+                    back.textContent = randomVerse;
+                } else if (type === 'book') {
+                    const randomBook = bibleBooks[Math.floor(Math.random() * bibleBooks.length)];
+                    back.textContent = randomBook;
+                }
+            }, 300); // Warte kurz, bis die Drehung gestartet ist
+        }
+    </script>
+</body>
+</html>
