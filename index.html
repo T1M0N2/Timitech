@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,87 +9,76 @@
     <style>
         /* Allgemeine Formatierung */
         body {
-            font-family: "Times New Roman", Times, serif; /* Schriftart geändert */
+            font-family: "Times New Roman", Times, serif;
             margin: 0;
             padding: 0;
             background-color: #f2f2f2;
-            overflow-y: scroll;
+            overflow-x: hidden; /* Verhindert horizontales Scrollen */
         }
 
-        /* Hauptcontainer */
-        #main-container {
-            text-align: center;
-            margin-top: 50px;
-            color: #666;
-        }
-
-        /* Kreuzsymbol */
-        #cross {
-            font-size: 100px;
-            color: #000;
-            margin-top: 20px;
-        }
-
-        /* Zufälliger Vers */
-        #random-verse {
-            margin-top: 20px;
-            font-size: 18px;
-            color: #000;
-        }
-
-        /* Schaltfläche "Neuer Vers" */
-        #generate-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #808080;
+        /* Header */
+        header {
+            background-color: #000;
             color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-
-        /* Büchersymbol */
-        #book-icon {
-            font-size: 60px;
-            color: #fff;
-            margin-top: 20px;
-        }
-
-        /* Schaltfläche "Zufälliges Buch" */
-        #random-book-button {
-            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 10px 20px;
-            font-size: 16px;
-            background-color: #808080;
-            color: white;
-            border: none;
+        }
+
+        /* Titel (Jesus2you) links zentriert und größer gemacht */
+        .header-title {
+            font-size: 35px;
+            font-weight: bold;
+            text-align: left;
+            flex-grow: 1; /* Stellt sicher, dass der Titel den verfügbaren Platz einnimmt */
+        }
+
+        /* Hamburger-Icon */
+        .hamburger {
+            font-size: 30px;
             cursor: pointer;
-            border-radius: 5px;
         }
 
-        /* Header und Footer */
-        header, footer {
-            background-color: #888;
-            color: #fff; 
-        }
-
-        /* Schriftart des gesamten Textes */
-        body, header, footer {
-            font-family: Arial, sans-serif;
-        }
-
-        footer {
-            padding: 5px 10px; /* Schmalerer Footer */
-            text-align: center;
+        /* Seitenleiste (Sidenav) */
+        .sidenav {
+            height: 100%;
+            width: 0;
             position: fixed;
-            bottom: 0;
-            width: 100%;
-            border-top: 1px solid #ccc;
-            background-color: #888;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
         }
 
-        /* Content-Container für Infos */
+        /* Links in der Sidenav */
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        /* Hover-Effekt für die Links */
+        .sidenav a:hover {
+            color:  #000000;
+        }
+
+        /* Schließen-Schaltfläche */
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        /* Hauptcontainer für Seiteninhalt */
         #info-container {
             margin: 100px auto;
             padding: 20px;
@@ -103,19 +92,36 @@
             color: #333;
             text-align: left;
         }
+
+        /* Footer */
+        footer {
+            padding: 5px 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid #000;
+            background-color: #000;
+            color: black;
+        }
     </style>
 </head>
 <body>
+
+    <!-- Header mit Hamburger-Menü -->
     <header class="w3-top">
-        <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing: 4px;">
-            <a href="#" class="w3-bar-item w3-button">Jesus2you</a>
-            <div class="w3-right w3-hide-small">
-                <a href="index.html" class="w3-bar-item w3-button">Home</a>
-                <a href="about.html" class="w3-bar-item w3-button">Bibelverse</a>
-                <a href="info.html" class="w3-bar-item w3-button">Contact</a>
-            </div>
-        </div>
+        <div class="header-title">Jesus2you</div> <!-- Titel vergrößert und links zentriert -->
+        <span class="hamburger" onclick="openNav()">&#9776;</span> <!-- Hamburger-Icon rechts -->
     </header>
+
+    <!-- Seitenleiste (Sidenav) -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">Über uns</a>
+        <a href="bibelverse.html">Bibelverse</a>
+        <a href="contact.html">Kontakt</a>
+    </div>
 
     <!-- Hauptcontainer für die Inhalte der Website -->
     <div id="info-container">
@@ -131,7 +137,20 @@
 
     <!-- Footer -->
     <footer class="w3-center w3-white w3-padding-20">
-        <p>Weitere Informationen und Kontaktmöglichkeiten</p>
+        <p></p>
     </footer>
+
+    <!-- JavaScript zum Öffnen und Schließen der Seitenleiste -->
+    <script>
+        /* Öffnet die Seitenleiste */
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        /* Schließt die Seitenleiste */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
 </body>
 </html>
